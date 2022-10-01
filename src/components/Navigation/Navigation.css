@@ -1,0 +1,162 @@
+.navigation {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.navigation__links {
+  display: flex;
+  list-style-type: none;
+  gap: 30px;
+  margin: 0 70px 0 0;
+  padding: 0;
+  align-items: center;
+}
+
+.navigation__link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.navigation__link_type_signin {
+  padding: 8px 20px;
+  background: #2be080;
+  border-radius: 3px;
+  color: #000;
+}
+
+.navigation__movies {
+  display: flex;
+  gap: 364px;
+  margin: 0 70px 0 0;
+}
+
+.navigation__movies-links {
+  gap: 16px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.navigation__all-movies-link {
+  color: #000;
+  font-weight: 500;
+}
+
+.navigation__saved-movies-link {
+  color: #000;
+}
+
+.navigation__button_type_account {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  border: none;
+  background-color: #fff;
+  display: flex;
+  padding: 0;
+  align-items: center;
+  gap: 13px;
+  cursor: pointer;
+}
+
+.navigation__acc-icon {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+}
+
+.navigation__button_type_burger {
+  border: none;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  background-color: #fff;
+  display: none;
+}
+
+.navigation__button-line,
+.navigation__button-line::after,
+.navigation__button-line::before {
+  width: 28px;
+  height: 3px;
+  background-color: #000;
+  border: none;
+  margin: 0;
+  position: absolute;
+  left: 8px;
+}
+
+.navigation__button-line::after,
+.navigation__button-line::before {
+  content: "";
+}
+
+.navigation__button-line::after {
+  left: 0;
+  bottom: 10px;
+}
+
+.navigation__button-line::before {
+  left: 0;
+  top: 10px;
+}
+
+@media screen and (max-width: 950px) {
+  .navigation__button_type_account {
+    display: none;
+  }
+
+  .navigation__movies-links {
+    display: none;
+  }
+
+  .navigation__button_type_burger {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .navigation__links {
+    margin-right: 30px;
+  }
+
+  .navigation__movies {
+    margin-right: 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navigation {
+    font-size: 10px;
+    margin-right: 0;
+  }
+
+  .navigation__links {
+    margin-right: 14px;
+    gap: 14px;
+  }
+
+  .navigation__link_type_signin {
+    padding: 7px 12px;
+  }
+
+  .navigation__movies {
+    margin-right: 14px;
+  }
+
+  .navigation__button_type_burger {
+    width: 40px;
+    height: 43px;
+  }
+
+  .navigation__button-line,
+  .navigation__button-line::after,
+  .navigation__button-line::before {
+    width: 22px;
+  }
+}
