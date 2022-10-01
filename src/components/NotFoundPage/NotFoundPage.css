@@ -26,3 +26,29 @@
   color: #3456f3;
   margin-top: 184px;
 }
+
+@media screen and (max-width: 800px) {
+  .not-found-page__header {
+    margin-top: 408px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .not-found-page__header {
+    font-size: 80px;
+    line-height: 97px;
+    margin-top: 330px;
+    margin-bottom: 9px;
+  }
+
+  .not-found-page__description {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .not-found-page__link {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 284px;
+  }
+}

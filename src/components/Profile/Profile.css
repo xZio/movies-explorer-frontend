@@ -45,6 +45,7 @@
 }
 
 .profile__input {
+  background-color: #fff;
   min-width: 122px;
   font-weight: 400;
   color: #000;

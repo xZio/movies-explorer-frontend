@@ -12,7 +12,7 @@
 }
 
 .register__input {
-  min-width: 396px;
+  min-width: 366px;
   height: 46px;
   background-color: #f9f9f9;
   border: none;
@@ -30,3 +30,11 @@
   color: #ff3055;
   padding: 5px 0;
 }
+
+@media screen and (max-width: 500px) {
+  .register__input {
+    min-width: 230px;
+  }
+}
+
+

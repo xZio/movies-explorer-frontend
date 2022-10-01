@@ -1,6 +1,7 @@
 import "./Navigation.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import icon from "../../images/account_icon.svg";
+import Burger from "../Burger/Burger";
 
 function Navigation() {
   const location = useLocation();
@@ -9,6 +10,11 @@ function Navigation() {
   function handleAccount(e) {
     e.preventDefault();
     navigate("/profile");
+  }
+
+  function handleBurgerOpen(e){
+    e.preventDefault();
+    document.querySelector(".burger__cover").classList.add('burger__cover_active');
   }
 
   return location.pathname === "/" ? (
@@ -59,9 +65,10 @@ function Navigation() {
         Аккаунт
         <img className="navigation__acc-icon" src={icon} alt="иконка акаунта" />
       </button>
-      <button className="navigation__button_type_burger">
+      <button className="navigation__button_type_burger" onClick={handleBurgerOpen}>
         <hr className="navigation__button-line"></hr>
       </button>
+      <Burger/>
     </nav>
   );
 }
