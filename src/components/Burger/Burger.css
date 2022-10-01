@@ -77,3 +77,23 @@
 .burger__cover_active {
   visibility: visible;
 }
+
+@media screen and (max-width: 540px) {
+  .burger__cover {
+    margin-top: -10px;
+  }
+
+  .burger {
+    width: 100%;
+    padding-top: 155px;
+    gap: 24px;
+  }
+
+  .burger__esc-button {
+    right: 18px;
+  }
+
+  .burger__button_type_account {
+    margin-top: 418px;
+  }
+}
