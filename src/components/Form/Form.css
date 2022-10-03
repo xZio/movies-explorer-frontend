@@ -11,12 +11,12 @@
   align-items: flex-start;
 }
 
-.form:active,
+/* .form:active,
 :hover,
 :focus {
   outline: 0;
   outline-offset: 0;
-}
+} */
 
 .form__logo {
   padding-right: 200px;

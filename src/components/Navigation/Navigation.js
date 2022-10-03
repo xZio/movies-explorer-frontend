@@ -7,14 +7,14 @@ function Navigation() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  function handleAccount(e) {
-    e.preventDefault();
+  function handleAccount() {
     navigate("/profile");
   }
 
-  function handleBurgerOpen(e){
-    e.preventDefault();
-    document.querySelector(".burger__cover").classList.add('burger__cover_active');
+  function handleBurgerOpen() {
+    document
+      .querySelector(".burger__cover")
+      .classList.add("burger__cover_active");
   }
 
   return location.pathname === "/" ? (
@@ -61,14 +61,19 @@ function Navigation() {
       <button
         className="navigation__button_type_account"
         onClick={handleAccount}
+        type="button"
       >
         Аккаунт
         <img className="navigation__acc-icon" src={icon} alt="иконка акаунта" />
       </button>
-      <button className="navigation__button_type_burger" onClick={handleBurgerOpen}>
+      <button
+        className="navigation__button_type_burger"
+        onClick={handleBurgerOpen}
+        type="button"
+      >
         <hr className="navigation__button-line"></hr>
       </button>
-      <Burger/>
+      <Burger />
     </nav>
   );
 }

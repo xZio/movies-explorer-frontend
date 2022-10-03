@@ -33,6 +33,7 @@ function Burger() {
         <button
           className="burger__button_type_account"
           onClick={handleAccountOpen}
+          type="button"
         >
           Аккаунт
           <img
@@ -42,7 +43,11 @@ function Burger() {
           />
         </button>
       </div>
-      <button onClick={handleBurgerEsc} className="burger__esc-button">
+      <button
+        onClick={handleBurgerEsc}
+        className="burger__esc-button"
+        type="button"
+      >
         <hr className="burger__esc-button-line"></hr>
         <hr className="burger__esc-button-line"></hr>
       </button>

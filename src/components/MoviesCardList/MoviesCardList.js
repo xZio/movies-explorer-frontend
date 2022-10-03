@@ -19,7 +19,9 @@ function MoviesCardList() {
         <MoviesCard />
       </ul>
 
-      <button className="movies-cardlist__more-button">Ещё</button>
+      <button className="movies-cardlist__more-button" type="button">
+        Ещё
+      </button>
     </section>
   );
 }

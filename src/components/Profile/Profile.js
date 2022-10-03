@@ -5,8 +5,7 @@ import "./Profile.css";
 function Profile() {
   const navigate = useNavigate();
 
-  function handleLogout(e) {
-    e.preventDefault();
+  function handleLogout() {
     navigate("/");
   }
   return (
@@ -26,9 +25,15 @@ function Profile() {
               <input className="profile__input" type="email"></input>
             </div>
             <span className="profile__input-error">Error example</span>
-            <button className="profile__submit-button">Редактировать</button>
+            <button className="profile__submit-button" type="submit">
+              Редактировать
+            </button>
           </form>
-          <button className="profile__logout-button" onClick={handleLogout}>
+          <button
+            type="button"
+            className="profile__logout-button"
+            onClick={handleLogout}
+          >
             Выйти из аккаунта
           </button>
         </section>

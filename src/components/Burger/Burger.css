@@ -3,11 +3,12 @@
   background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
   width: 100%;
-  height: 200%;
+  height: 100vh;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
   visibility: hidden;
+  padding-bottom: 173px;
 }
 
 .burger {
@@ -15,13 +16,13 @@
   top: 0;
   right: 0;
   width: 520px;
-  height: 100%;
+  height: 100vh;
   background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 160px;
   gap: 28px;
+  padding-bottom: 173px;
 }
 
 .burger__esc-button {
@@ -60,6 +61,10 @@
   line-height: 22px;
 }
 
+.burger__link:first-child {
+  padding-top: 160px;
+}
+
 .burger__button_type_account {
   font-weight: 500;
   font-size: 14px;
@@ -81,12 +86,13 @@
 @media screen and (max-width: 540px) {
   .burger__cover {
     margin-top: -10px;
+    padding-bottom: 0;
   }
 
   .burger {
     width: 100%;
-    padding-top: 155px;
     gap: 24px;
+    padding-bottom: 0;
   }
 
   .burger__esc-button {

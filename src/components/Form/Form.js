@@ -14,7 +14,7 @@ function Form({ title, children, buttonText, isRegisterText, linkText, link }) {
         <img className="form__logo" src={logo} alt="логотип" />
         <h2 className="form__title">{title}</h2>
         <form className="form__container">{children}</form>
-        <button className="form__button" onClick={handleSubmit}>
+        <button className="form__button" onClick={handleSubmit} type="submit">
           {buttonText}
         </button>
         <div className="form__question">
