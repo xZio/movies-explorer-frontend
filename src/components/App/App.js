@@ -7,13 +7,17 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
+import { moviesApi } from "../../utils/MoviesApi";
 
 function App() {
+  function getMovies() {
+    return moviesApi.getMovies().then((data) => console.log(data));
+  }
   return (
     <div className="app">
       <Routes>
         <Route exact path="/" element={<Main />} />
-        <Route path="/movies" element={<Movies />} />
+        <Route path="/movies" element={<Movies getMovies= {getMovies}/>} />
         <Route path="/saved-movies" element={<SavedMovies />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Register />} />
