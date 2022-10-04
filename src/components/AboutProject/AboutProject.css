@@ -1,0 +1,136 @@
+.about-project {
+  display: flex;
+  flex-direction: column;
+  margin: 110px 70px;
+}
+
+.about-project__content {
+  display: flex;
+  margin-top: 70px;
+  margin-bottom: 110px;
+  gap: 50px;
+}
+
+.about-project__content__title {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+  margin: 0;
+  padding-bottom: 26px;
+}
+
+.about-project__content__description {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+}
+
+.about-project__time-lines {
+  display: flex;
+  text-align: center;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.about-project__time-lines__backend {
+  width: 20%;
+}
+
+.about-project__time-lines__backend__duration {
+  height: 36px;
+  margin: 0;
+  background-color: #2be080;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-project__time-lines__backend__title {
+  margin: 0;
+  font-weight: 500;
+  color: #a0a0a0;
+  padding-top: 14px;
+}
+
+.about-project__time-lines__frontend {
+  width: 80%;
+}
+
+.about-project__time-lines__frontend__duration {
+  height: 36px;
+  margin: 0;
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-project__time-lines__frontend__title {
+  margin: 0;
+  font-weight: 500;
+  color: #a0a0a0;
+  padding-top: 14px;
+}
+
+@media screen and (max-width: 870px) {
+  .about-project {
+    margin: 90px 50px;
+  }
+
+  .about-project__content__description {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-project__content {
+    margin-bottom: 88px;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .about-project {
+    margin: 70px 15px;
+  }
+
+  .about-project__content {
+    flex-direction: column;
+    gap: 57px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+
+  .about-project__content__title {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 16px;
+  }
+
+  .about-project__content__description {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-project__time-lines {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about-project__time-lines__backend__title {
+    padding-top: 9px;
+  }
+
+  .about-project__time-lines__frontend__title {
+    padding-top: 9px;
+  }
+
+  .about-project__time-lines__backend__duration {
+    width: auto;
+  }
+
+  .about-project__time-lines__backend {
+    width: 40%;
+  }
+}

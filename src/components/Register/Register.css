@@ -1,0 +1,40 @@
+.register__input-container {
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.register__input-title {
+  color: #a0a0a0;
+  padding-bottom: 10px;
+}
+
+.register__input {
+  min-width: 366px;
+  height: 46px;
+  background-color: #f9f9f9;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 16px;
+  padding: 0 15px;
+}
+
+.form__container :last-child :nth-child(2) {
+  color: #ff3055;
+}
+
+.register__input-error {
+  color: #ff3055;
+  padding: 5px 0;
+}
+
+@media screen and (max-width: 500px) {
+  .register__input {
+    min-width: 230px;
+  }
+}
+
+
