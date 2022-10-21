@@ -1,12 +1,31 @@
 import "./Form.css";
 import logo from "../../images/logo.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-function Form({ title, children, buttonText, isRegisterText, linkText, link }) {
-  const navigate = useNavigate();
+function Form({
+  title,
+  children,
+  buttonText,
+  isRegisterText,
+  linkText,
+  link,
+  handleLogin,
+  handleRegister,
+  values,
+}) {
+  const navigation = useLocation();
+
   function handleSubmit(e) {
     e.preventDefault();
-    navigate("/movies");
+    let {name, email, password } = values;
+    console.log(values)
+    if (!email || !password) {
+      return;
+    }
+
+    navigation.pathname === "/signup"
+      ? handleRegister(name, email, password)
+      : handleLogin(email, password);
   }
   return (
     <section className="form">

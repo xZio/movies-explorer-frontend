@@ -7,7 +7,6 @@ function Burger() {
 
   function handleBurgerEsc(e) {
     e.preventDefault();
-    console.log(document.querySelector(".burger__cover"));
     document
       .querySelector(".burger__cover")
       .classList.remove("burger__cover_active");

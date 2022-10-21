@@ -44,8 +44,16 @@
   font-weight: 500;
 }
 
+.navigation__all-movies-link_logged-in {
+  color: #fff;
+}
+
 .navigation__saved-movies-link {
   color: #000;
+}
+
+.navigation__saved-movies-link_logged-in {
+  color: #fff;
 }
 
 .navigation__button_type_account {
@@ -59,6 +67,12 @@
   align-items: center;
   gap: 13px;
   cursor: pointer;
+}
+
+.navigation__button_type_account_logged-in {
+  background-color: #2be080;
+  padding: 5px;
+  border-radius: 8px;
 }
 
 .navigation__acc-icon {
@@ -75,7 +89,7 @@
   padding: 0;
   cursor: pointer;
   position: relative;
-  background-color: #fff;
+  background-color: transparent;
   display: none;
 }
 

@@ -1,3 +1,5 @@
+import { ALL_MOVIES_URL } from "./constants";
+
 class MoviesApi {
   constructor(config) {
     this._url = config.url;
@@ -20,7 +22,7 @@ class MoviesApi {
 }
 
 export const moviesApi = new MoviesApi({
-  url: "https://api.nomoreparties.co",
+  url: ALL_MOVIES_URL,
   headers: {
     "content-type": "application/json",
   },

@@ -73,6 +73,10 @@ input[type="search"]::-webkit-search-results-decoration {
   padding: 0;
 }
 
+.searchform__button_disabled {
+  background-color: #a0a0a0;
+}
+
 .searchform__separator {
   margin: 0 30px;
   height: 40px;
