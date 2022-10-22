@@ -3,8 +3,7 @@ import "./Register.css";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 function Register({ handleRegister }) {
-  const { values, handleChange, isValid, resetForm, setIsValid } =
-    useFormAndValidation();
+  const { values, errors, handleChange, isValid } = useFormAndValidation();
 
   return (
     <Form
@@ -15,6 +14,7 @@ function Register({ handleRegister }) {
       link="/signin"
       handleRegister={handleRegister}
       values={values}
+      isValid={isValid}
     >
       <div className="register__input-container">
         <span className="register__input-title"> Имя</span>
@@ -26,7 +26,7 @@ function Register({ handleRegister }) {
           onChange={handleChange}
           required
         ></input>
-        <span className="register__input-error">error example</span>
+        <span className="register__input-error">{errors.name}</span>
       </div>
       <div className="register__input-container">
         <span className="register__input-title">E-mail</span>
@@ -38,7 +38,7 @@ function Register({ handleRegister }) {
           onChange={handleChange}
           required
         ></input>
-        <span className="register__input-error">error example</span>
+        <span className="register__input-error">{errors.email}</span>
       </div>
       <div className="register__input-container">
         <span className="register__input-title">Пароль</span>
@@ -51,7 +51,7 @@ function Register({ handleRegister }) {
           onChange={handleChange}
           required
         ></input>
-        <span className="register__input-error">Что-то пошло не так...</span>
+        <span className="register__input-error">{errors.password}</span>
       </div>
     </Form>
   );

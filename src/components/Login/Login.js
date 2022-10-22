@@ -3,8 +3,7 @@ import "./Login.css";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 function Login({ handleLogin }) {
-  const { values, handleChange, isValid, resetForm, setIsValid } =
-    useFormAndValidation();
+  const { values, handleChange, errors, isValid } = useFormAndValidation();
 
   return (
     <Form
@@ -15,6 +14,7 @@ function Login({ handleLogin }) {
       link="/signup"
       handleLogin={handleLogin}
       values={values}
+      isValid={isValid}
     >
       <div className="register__input-container">
         <span className="register__input-title"> E-mail</span>
@@ -26,7 +26,7 @@ function Login({ handleLogin }) {
           onChange={handleChange}
           required
         ></input>
-        <span className="register__input-error">error example</span>
+        <span className="register__input-error">{errors.email || ""}</span>
       </div>
       <div className="register__input-container login__input-container">
         <span className="register__input-title">Пароль</span>
@@ -39,7 +39,7 @@ function Login({ handleLogin }) {
           onChange={handleChange}
           required
         ></input>
-        <span className="register__input-error">Что-то пошло не так...</span>
+        <span className="register__input-error">{errors.password || ""}</span>
       </div>
     </Form>
   );

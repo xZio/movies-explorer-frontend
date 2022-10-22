@@ -2,8 +2,6 @@ import "./MoviesCard.css";
 import saved from "../../images/saved-img.svg";
 import { useLocation } from "react-router-dom";
 import { ALL_MOVIES_URL } from "../../utils/constants";
-import { mainApi } from "../../utils/MainApi";
-import { useState } from "react";
 
 function MoviesCard({ movie, onCardClick, isSaved, onDeleteClick }) {
   const location = useLocation();
@@ -38,22 +36,24 @@ function MoviesCard({ movie, onCardClick, isSaved, onDeleteClick }) {
             ></button>
           </>
         ) : (
-          !isSaved && (
-            <>
-              <button
-                type="button"
-                className={"movies-card__save-button"}
-                onClick={handleClick}
-              >
-                Сохранить
-              </button>
-              <img
-                className="movies-card__saved-img"
-                alt="Иконка: Фильм сохранён"
-                src={saved}
-              />
-            </>
-          )
+          <>
+            <button
+              type="button"
+              className={
+                !isSaved
+                  ? "movies-card__save-button"
+                  : "movies-card__save-button_invisible"
+              }
+              onClick={handleClick}
+            >
+              Сохранить
+            </button>
+            <img
+              className="movies-card__saved-img"
+              alt="Иконка: Фильм сохранён"
+              src={saved}
+            />
+          </>
         )}
 
         <div className="movies-card__description">

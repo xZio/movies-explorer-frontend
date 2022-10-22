@@ -8,18 +8,7 @@ import Preloader from "../Preloader/Preloader";
 import { moviesApi } from "../../utils/MoviesApi";
 import { filterCheckbox, filterMovies } from "../../utils/utils";
 
-function Movies({
-  /* filteredMovies,
-  shortMovies,
-  searchResult,
-  isLoading,
-  isNothing,
-  onChange, */
-  onCardClick,
-  savedMovies,
-  /*   isShort,
-  isError, */
-}) {
+function Movies({ onCardClick, savedMovies }) {
   const [allSaerchMovies, setAllSearchMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isShort, setIsShort] = useState(false);
@@ -48,23 +37,23 @@ function Movies({
   function searchResult(inputValue, isShort) {
     localStorage.setItem("searchText", inputValue);
     localStorage.setItem("checkbox", isShort);
-    getAllMovies().then((data) => {
-      setIsLoading(false);
-      let filterResult = filterMovies(data, inputValue);
-      if (filterResult.length === 0) {
-        setIsNothing(true);
-        // setFilteredMovies([]);
-        //setAllSearchMovies([]);
-      }
+    getAllMovies()
+      .then((data) => {
+        setIsLoading(false);
+        const filterResult = filterMovies(data, inputValue);
+        if (filterResult.length === 0) {
+          setIsNothing(true);
+        }
 
-      setAllSearchMovies(filterResult);
-      if (isShort) {
-        setFilteredMovies(filterCheckbox(filterResult));
-        return;
-      }
-      localStorage.setItem("movies", JSON.stringify(filterResult));
-      setFilteredMovies(filterResult);
-    });
+        setAllSearchMovies(filterResult);
+        if (isShort) {
+          setFilteredMovies(filterCheckbox(filterResult));
+          return;
+        }
+        localStorage.setItem("movies", JSON.stringify(filterResult));
+        setFilteredMovies(filterResult);
+      })
+      .catch((err) => console.err);
   }
 
   function handleCheck() {
@@ -74,8 +63,6 @@ function Movies({
     isShort
       ? setFilteredMovies(allSaerchMovies)
       : setFilteredMovies(filterCheckbox(allSaerchMovies));
-
-    //filteredMovies.length !== 0 ? setIsNothing(false) : setIsNothing(true);
   }
 
   useEffect(() => {
@@ -84,9 +71,6 @@ function Movies({
       setFilteredMovies(movies);
       setAllSearchMovies(movies);
       setIsShort(JSON.parse(localStorage.getItem("checkbox")));
-      /* if (localStorage.getItem("checkbox") === true) {
-        setFilteredMovies(filterCheckbox(movies));
-      } */
       return;
     }
   }, []);
@@ -100,6 +84,7 @@ function Movies({
       ? setIsNothing(false)
       : setIsNothing(true);
   }, [filteredMovies, isLoading]);
+
   return (
     <>
       <Header />

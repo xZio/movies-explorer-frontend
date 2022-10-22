@@ -68,6 +68,14 @@ class MainApi {
       headers: this._headers,
     }).then(this._checkResponse);
   }
+
+  updateUser(name, email) {
+    return fetch(`${this._url}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({ name, email }),
+    }).then(this._checkResponse);
+  }
 }
 
 export const mainApi = new MainApi({

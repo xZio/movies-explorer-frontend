@@ -7,7 +7,6 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
-//import { moviesApi } from "../../utils/MoviesApi";
 import { useEffect, useState } from "react";
 import * as auth from "../../utils/Auth";
 import ProtecedRoute from "../ProtectedRoute/ProtectedRoute";
@@ -17,25 +16,10 @@ import { filterCheckbox } from "../../utils/utils";
 
 function App() {
   const navigate = useNavigate();
-  //const location = useLocation();
-  /*  const [filteredMovies, setFilteredMovies] = useState(
-    localStorage.movies ? JSON.parse(localStorage.movies) : []
-  );
-  const [shortMovies, setShortMovies] = useState(
-    localStorage.shortMovies ? JSON.parse(localStorage.shortMovies) : []
-  ); */
   const [savedMovies, setSavedMovies] = useState([]);
   const [savedShortMovies, setSavedShortMovies] = useState([]);
   const [isLoading, setIsLoading] = useState([false]);
-  // const [savedShortMovies, setSavedShortMovies] = useState([]);
-  //const [isLoading, setIsLoading] = useState(false);
-  //const [isNothing, setIsNothing] = useState(false);
-  /*  const [isShort, setIsShort] = useState(
-    localStorage.checkbox ? JSON.parse(localStorage.checkbox) : false
-  ); */
-  // const [isError, setIsError] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  //const [userEmail, setUserEmail] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -62,19 +46,16 @@ function App() {
       mainApi
         .getSavedMovies()
         .then((data) => {
-          setSavedMovies(data);
-          setSavedShortMovies(filterCheckbox(data));
+          const currentUserMovies = data.filter(
+            (movie) => movie.owner === currentUser._id
+          );
+          setSavedMovies(currentUserMovies);
+          setSavedShortMovies(filterCheckbox(currentUserMovies));
           setIsLoading(false);
-          // setSavedShortMovies(filterCheckbox(data));
-          /* localStorage.setItem("savedMovies", JSON.stringify(data));
-          localStorage.setItem(
-            "savedShortMovies",
-            JSON.stringify(filterCheckbox(data))
-          ); */
         })
         .catch((err) => console.log(err));
     }
-  }, [loggedIn]);
+  }, [loggedIn, currentUser]);
 
   function handleLogin(email, password) {
     auth
@@ -82,7 +63,6 @@ function App() {
       .then((data) => {
         localStorage.setItem("jwt", data.token);
         setLoggedIn(true);
-        //setUserEmail(email);
         navigate("/movies");
       })
       .catch((err) => {
@@ -102,65 +82,19 @@ function App() {
       });
   }
 
-  /* function getAllMovies() {
-    setFilteredMovies([]);
-    setShortMovies([]);
-    setIsNothing(false);
-    setIsLoading(true);
-    return moviesApi
-      .getMovies()
-      .then((data) => {
-        return data;
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsError(true);
-        setIsLoading(false);
-      });
-  } */
-
-  /* function handleCheck() {
-    setIsShort(!isShort);
-    localStorage.setItem("checkbox", !isShort);
-
-    if (!isShort) {
-      shortMovies.length !== 0 ? setIsNothing(false) : setIsNothing(true);
-      return;
-    }
-    filteredMovies.length !== 0 ? setIsNothing(false) : setIsNothing(true);
+  function handleLogout() {
+    setCurrentUser({});
+    setLoggedIn(false);
+    localStorage.clear();
   }
 
-  function filterMovies(movies, inputValue) {
-    return movies.filter((movie) => {
-      return movie.nameRU.toLowerCase().includes(inputValue.toLowerCase());
-    });
+  function handleUpdateUser(name, email) {
+    mainApi.setHeaders();
+    mainApi
+      .updateUser(name, email)
+      .then((user) => setCurrentUser(user))
+      .catch((err) => console.log(err));
   }
-
-  function filterCheckbox(movies) {
-    return movies.filter((movie) => {
-      return movie.duration < 40;
-    });
-  }
-
-  function searchResult(inputValue) {
-    getAllMovies().then((data) => {
-      setIsLoading(false);
-      let movies = filterMovies(data, inputValue);
-
-      localStorage.setItem("movies", JSON.stringify(movies));
-      localStorage.setItem(
-        "shortMovies",
-        JSON.stringify(filterCheckbox(movies))
-      );
-      localStorage.setItem("searchText", inputValue);
-      localStorage.setItem("checkbox", isShort);
-
-      movies.length > 0 ? setIsNothing(false) : setIsNothing(true);
-
-      setFilteredMovies(movies);
-      setShortMovies(filterCheckbox(movies));
-    });
-  } */
 
   function handleSaveMovie(movie) {
     mainApi
@@ -189,14 +123,6 @@ function App() {
             element={
               <ProtecedRoute path="/movies" loggedIn={loggedIn}>
                 <Movies
-                  /*   searchResult={searchResult}
-                  filteredMovies={filteredMovies}
-                  shortMovies={shortMovies}
-                  isLoading={isLoading}
-                  isNothing={isNothing}
-                  isShort={isShort}
-                  isError={isError}
-                  onChange={handleCheck} */
                   savedMovies={savedMovies}
                   onCardClick={handleSaveMovie}
                 />
@@ -208,15 +134,8 @@ function App() {
             element={
               <ProtecedRoute path="/saved-movies" loggedIn={loggedIn}>
                 <SavedMovies
-                  // searchResult={searchResult}
-                  // filteredMovies={filteredMovies}
-                  // isNothing={isNothing}
                   isLoading={isLoading}
-                  // isError={isError}
                   savedMovies={savedMovies}
-                  savedShortMovies={savedShortMovies}
-                  // isShort={isShort}
-                  //onChange={handleCheck}
                   onDeleteClick={handleDeleteSavedMovie}
                 />
               </ProtecedRoute>
@@ -226,7 +145,10 @@ function App() {
             path="/profile"
             element={
               <ProtecedRoute path="/profile" loggedIn={loggedIn}>
-                <Profile />
+                <Profile
+                  handleLogout={handleLogout}
+                  handleUpdateUser={handleUpdateUser}
+                />
               </ProtecedRoute>
             }
           />

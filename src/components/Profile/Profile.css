@@ -65,6 +65,7 @@
   border-bottom: 1px solid #e8e8e8;
   width: 100%;
   margin-bottom: 17px;
+  min-height: 15px;
 }
 .profile__input::placeholder {
   color: #000;
@@ -79,6 +80,10 @@
   padding: 0;
   margin-top: 190px;
   cursor: pointer;
+}
+
+.profile__submit-button_disabled {
+  color: #ff3055;
 }
 
 .profile__logout-button {

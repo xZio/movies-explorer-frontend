@@ -38,6 +38,10 @@
   cursor: pointer;
 }
 
+.form__button_disabled {
+  background-color: #a0a0a0;
+}
+
 .form__question {
   font-weight: 400;
   font-size: 14px;

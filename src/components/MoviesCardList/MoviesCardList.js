@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useScreenWidth } from "../../hooks/useScreenWidth";
 import { CARDS_TO_RENDER } from "../../utils/constants";
-import { mainApi } from "../../utils/MainApi";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 import "./MoviesCardList.css";
@@ -10,14 +9,10 @@ import "./MoviesCardList.css";
 function MoviesCardList({
   filteredMovies,
   savedMovies,
-  //shortMovies,
   filteredSavedMovies,
-  //savedShortMovies,
   isNothing,
   isError,
-  isShort,
   onCardClick,
- // isSaved,
   onDeleteClick,
 }) {
   const location = useLocation();
@@ -46,39 +41,8 @@ function MoviesCardList({
     }
     setMoviesToRender(filteredSavedMovies.slice(0, renderOptions.start));
   }, [filteredMovies, renderOptions, location, filteredSavedMovies]);
-  /* useEffect(() => {
-    if (isShort && location.pathname === "/movies") {
-      setMoviesToRender(shortMovies);
-      return;
-    }
-
-    if (location.pathname === "/saved-movies") {
-      if (isShort) {
-        setMoviesToRender(savedShortMovies);
-        return;
-      }
-      setMoviesToRender(savedMovies);
-      return;
-    }
-
-    setMoviesToRender(filteredMovies.slice(0, renderOptions.start));
-  }, [
-    filteredMovies,
-    shortMovies,
-    renderOptions,
-    isShort,
-    savedMovies,
-    location,
-    savedShortMovies,
-  ]); */
 
   function addMoreMovies() {
-    /* if (isShort) {
-      setMoviesToRender(
-        shortMovies.slice(0, moviesToRender.length + renderOptions.more)
-      );
-      return;
-    } */
     setMoviesToRender(
       filteredMovies.slice(0, moviesToRender.length + renderOptions.more)
     );
