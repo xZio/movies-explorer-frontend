@@ -1,4 +1,4 @@
-export const BASE_URL = "https://api.ya.movies.nomoredomains.sbs";
+export const BASE_URL = "https://ya.movies.nomoredomains.sbs";
 export const ALL_MOVIES_URL = "https://api.nomoreparties.co";
 export const CARDS_TO_RENDER = {
   display: {
