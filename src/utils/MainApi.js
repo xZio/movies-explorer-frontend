@@ -1,4 +1,5 @@
-import { BASE_URL } from "./Auth";
+
+import { ALL_MOVIES_URL, BASE_URL } from "./constants";
 
 class MainApi {
   constructor(config) {
@@ -54,7 +55,7 @@ class MainApi {
         description: description,
         image: { url: image.url },
         trailerLink: trailerLink,
-        thumbnail: `https://api.nomoreparties.co/${image.formats.thumbnail.url}`,
+        thumbnail: `${ALL_MOVIES_URL}/${image.formats.thumbnail.url}`,
         nameRU: nameRU,
         nameEN: nameEN,
         movieId: id,

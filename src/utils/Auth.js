@@ -1,4 +1,5 @@
-export const BASE_URL = "http://localhost:3000";
+import { BASE_URL } from "./constants";
+
 
 export function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(res.status);

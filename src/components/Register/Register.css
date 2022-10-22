@@ -22,9 +22,9 @@
   padding: 0 15px;
 }
 
-.form__container :last-child :nth-child(2) {
+/* .form__container :last-child :nth-child(2) {
   color: #ff3055;
-}
+} */
 
 .register__input-error {
   color: #ff3055;
