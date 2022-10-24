@@ -1,11 +1,47 @@
 import "./SearchForm.css";
 import searchIcon from "../../images/search-icon.svg";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
-function SearchForm() {
+function SearchForm({ searchResult, onCheck, isShort }) {
+  const { values, handleChange, isValid, resetForm, setIsValid } =
+    useFormAndValidation();
+
+  const location = useLocation();
+  useEffect(() => {
+    setIsValid(false);
+  }, [setIsValid]);
+
+  useEffect(() => {
+    if (
+      location.pathname === "/movies" &&
+      localStorage.getItem("search-text")
+    ) {
+      values.search = localStorage.getItem("search-text");
+      setIsValid(true);
+      return;
+    }
+    if (
+      location.pathname === "/saved-movies" &&
+      localStorage.getItem("saved-search-text")
+    ) {
+      values.search = localStorage.getItem("saved-search-text");
+      setIsValid(true);
+      return;
+    }
+  }, []);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    searchResult(values.search, isShort);
+    resetForm();
+  }
+
   return (
-    <section className="searchform" noValidate>
-      <form className="searchform__form">
+    <section className="searchform">
+      <form className="searchform__form" noValidate onSubmit={handleSubmit}>
         <div className="searchform__container">
           <img
             className="searchform__icon"
@@ -14,15 +50,30 @@ function SearchForm() {
           />
           <input
             type="search"
+            name="search"
             required
             placeholder="Фильм"
             className="searchform__input"
+            onChange={handleChange}
+            value={values.search || ""}
           ></input>
-          <button type="submit" className="searchform__button" />
+          <button
+            type="submit"
+            className={
+              isValid
+                ? "searchform__button"
+                : "searchform__button searchform__button_disabled"
+            }
+            disabled={!isValid}
+          />
         </div>
 
         <hr className="searchform__separator"></hr>
-        <FilterCheckbox checkboxText="Короткометражки"></FilterCheckbox>
+        <FilterCheckbox
+          checkboxText="Короткометражки"
+          checked={isShort}
+          onCheck={onCheck}
+        ></FilterCheckbox>
       </form>
     </section>
   );

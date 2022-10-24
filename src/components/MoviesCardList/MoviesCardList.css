@@ -16,6 +16,15 @@
   list-style-type: none;
 }
 
+.movies-cardlist__nothing-find {
+  align-self: center;
+}
+
+.movies-cardlist__error {
+  text-align: center;
+  color: #ff3055;
+}
+
 .movies-cardlist__more-button {
   align-self: center;
   padding: 0;
@@ -56,5 +65,11 @@
   .movies-cardlist__more-button {
     width: 240px;
     margin-top: 64px;
+  }
+
+  .movies-cardlist__nothing-find {
+    align-self: center;
+    font-size: 12px;
+    line-height: 15px;
   }
 }

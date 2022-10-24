@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import icon from "../../images/account_icon.svg";
 import Burger from "../Burger/Burger";
 
-function Navigation() {
+function Navigation({ loggedIn }) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ function Navigation() {
       .classList.add("burger__cover_active");
   }
 
-  return location.pathname === "/" ? (
+  return location.pathname === "/" && !loggedIn ? (
     <nav className="navigation">
       <ul className="navigation__links">
         <li>
@@ -44,7 +44,11 @@ function Navigation() {
         <li>
           <Link
             to="/movies"
-            className=" navigation__link navigation__all-movies-link"
+            className={
+              location.pathname === "/"
+                ? "navigation__link navigation__all-movies-link navigation__all-movies-link_logged-in"
+                : "navigation__link navigation__all-movies-link"
+            }
           >
             Фильмы
           </Link>
@@ -52,14 +56,22 @@ function Navigation() {
         <li>
           <Link
             to="/saved-movies"
-            className="navigation__link navigation__saved-movies-link"
+            className={
+              location.pathname === "/"
+                ? "navigation__link navigation__saved-movies-link navigation__saved-movies-link_logged-in"
+                : "navigation__link navigation__saved-movies-link"
+            }
           >
             Сохранённые фильмы
           </Link>
         </li>
       </ul>
       <button
-        className="navigation__button_type_account"
+        className={
+          location.pathname === "/"
+            ? "navigation__button_type_account navigation__button_type_account_logged-in"
+            : "navigation__button_type_account"
+        }
         onClick={handleAccount}
         type="button"
       >

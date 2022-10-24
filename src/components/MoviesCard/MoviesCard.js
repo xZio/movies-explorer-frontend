@@ -1,18 +1,29 @@
 import "./MoviesCard.css";
-import movie from "../../images/movie_pic(временно).png";
-import saved from "../../images/saved-img.svg";
 import { useLocation } from "react-router-dom";
+import { ALL_MOVIES_URL } from "../../utils/constants";
 
-function MoviesCard() {
+function MoviesCard({ movie, onCardClick, isSaved, onDeleteClick }) {
   const location = useLocation();
-  function handleSaveCard(e) {
-    e.target.classList.add("movies-card__save-button_invisible");
+  const imageUrl = `${ALL_MOVIES_URL}${movie.image.url}`;
+
+  const duration =
+    movie.duration < 60
+      ? `${movie.duration}м`
+      : `${Math.trunc(movie.duration / 60)}ч ${movie.duration % 60}м`;
+
+  function handleClick() {
+    onCardClick(movie);
   }
+
+  function handleDelete() {
+    onDeleteClick(movie);
+  }
+
   return (
     <li className="movies-card__item">
       <article className="movies-card">
-        <a target="_blank" rel="noreferrer" href="https://www.youtube.com/">
-          <img className="movies-card__image" src={movie} alt="превью"></img>
+        <a target="_blank" rel="noreferrer" href={movie.trailerLink}>
+          <img className="movies-card__image" src={imageUrl} alt="превью"></img>
         </a>
 
         {location.pathname === "/saved-movies" ? (
@@ -20,28 +31,40 @@ function MoviesCard() {
             <button
               className="movies-card__saved-img movies-card__unsaved-button"
               type="button"
+              onClick={handleDelete}
             ></button>
           </>
         ) : (
           <>
             <button
               type="button"
-              className={"movies-card__save-button"}
-              onClick={handleSaveCard}
+              className={
+                !isSaved
+                  ? "movies-card__save-button"
+                  : "movies-card__save-button_invisible"
+              }
+              onClick={handleClick}
             >
               Сохранить
             </button>
-            <img
+
+            <button
+              type="button"
               className="movies-card__saved-img"
-              alt="Иконка: Фильм сохранён"
-              src={saved}
-            />
+              onClick={handleDelete}
+            >
+              {/* <img
+                className="movies-card__saved-img"
+                alt="Иконка: Фильм сохранён"
+                src={saved}
+              /> */}
+            </button>
           </>
         )}
 
         <div className="movies-card__description">
-          <h2 className="movies-card__name"> Бег это свобода </h2>
-          <span className="movies-card__duration"> 1ч 17м</span>
+          <h2 className="movies-card__name"> {movie.nameRU} </h2>
+          <span className="movies-card__duration"> {duration}</span>
         </div>
       </article>
     </li>

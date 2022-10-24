@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import Navigation from "../Navigation/Navigation";
 
-function Header() {
+function Header({ loggedIn }) {
   const location = useLocation();
 
   return (
@@ -16,7 +16,7 @@ function Header() {
         <img src={logo} alt="лого" className="header__logo"></img>
       </Link>
 
-      <Navigation />
+      <Navigation loggedIn={loggedIn} />
     </header>
   );
 }

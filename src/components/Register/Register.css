@@ -22,13 +22,15 @@
   padding: 0 15px;
 }
 
-.form__container :last-child :nth-child(2) {
+/* .form__container :last-child :nth-child(2) {
   color: #ff3055;
-}
+} */
 
 .register__input-error {
   color: #ff3055;
   padding: 5px 0;
+  max-width: 396px;
+  min-height: 12px;
 }
 
 @media screen and (max-width: 500px) {

@@ -1,7 +1,10 @@
 import Form from "../Form/Form";
 import "./Register.css";
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
-function Register() {
+function Register({ handleRegister }) {
+  const { values, errors, handleChange, isValid } = useFormAndValidation();
+
   return (
     <Form
       title="Добро пожаловать!"
@@ -9,26 +12,46 @@ function Register() {
       isRegisterText="Уже зарегистрированы?"
       linkText="Войти"
       link="/signin"
+      handleRegister={handleRegister}
+      values={values}
+      isValid={isValid}
     >
       <div className="register__input-container">
         <span className="register__input-title"> Имя</span>
-        <input type="text" className="register__input" required></input>
-        <span className="register__input-error">error example</span>
+        <input
+          value={values.name || ""}
+          type="text"
+          className="register__input"
+          name="name"
+          onChange={handleChange}
+          required
+        ></input>
+        <span className="register__input-error">{errors.name}</span>
       </div>
       <div className="register__input-container">
         <span className="register__input-title">E-mail</span>
-        <input type="email" className="register__input" required></input>
-        <span className="register__input-error">error example</span>
+        <input
+          value={values.email || ""}
+          type="email"
+          className="register__input"
+          name="email"
+          onChange={handleChange}
+          required
+        ></input>
+        <span className="register__input-error">{errors.email}</span>
       </div>
       <div className="register__input-container">
         <span className="register__input-title">Пароль</span>
         <input
-          required
+          value={values.password || ""}
           type="password"
           className="register__input"
           autoComplete="off"
+          name="password"
+          onChange={handleChange}
+          required
         ></input>
-        <span className="register__input-error">Что-то пошло не так...</span>
+        <span className="register__input-error">{errors.password}</span>
       </div>
     </Form>
   );
