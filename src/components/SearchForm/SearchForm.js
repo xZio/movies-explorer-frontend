@@ -15,9 +15,21 @@ function SearchForm({ searchResult, onCheck, isShort }) {
   }, [setIsValid]);
 
   useEffect(() => {
-    if (location.pathname === "/movies" && localStorage.getItem("searchText")) {
-      values.search = localStorage.getItem("searchText");
+    if (
+      location.pathname === "/movies" &&
+      localStorage.getItem("search-text")
+    ) {
+      values.search = localStorage.getItem("search-text");
       setIsValid(true);
+      return;
+    }
+    if (
+      location.pathname === "/saved-movies" &&
+      localStorage.getItem("saved-search-text")
+    ) {
+      values.search = localStorage.getItem("saved-search-text");
+      setIsValid(true);
+      return;
     }
   }, []);
 

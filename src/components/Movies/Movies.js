@@ -8,7 +8,7 @@ import Preloader from "../Preloader/Preloader";
 import { moviesApi } from "../../utils/MoviesApi";
 import { filterCheckbox, filterMovies } from "../../utils/utils";
 
-function Movies({ onCardClick, savedMovies }) {
+function Movies({ onCardClick, savedMovies, onDeleteClick }) {
   const [allSaerchMovies, setAllSearchMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isShort, setIsShort] = useState(false);
@@ -35,8 +35,9 @@ function Movies({ onCardClick, savedMovies }) {
 
   // отфильтрованные фильмы в зависимости от поиска и состояния чекбокса
   function searchResult(inputValue, isShort) {
-    localStorage.setItem("searchText", inputValue);
+    localStorage.setItem("search-text", inputValue);
     localStorage.setItem("checkbox", isShort);
+
     getAllMovies()
       .then((data) => {
         setIsLoading(false);
@@ -53,7 +54,7 @@ function Movies({ onCardClick, savedMovies }) {
         localStorage.setItem("movies", JSON.stringify(filterResult));
         setFilteredMovies(filterResult);
       })
-      .catch((err) => console.err);
+      .catch((err) => console.log(err));
   }
 
   function handleCheck() {
@@ -80,7 +81,7 @@ function Movies({ onCardClick, savedMovies }) {
   }, [isShort, allSaerchMovies]);
 
   useEffect(() => {
-    filteredMovies.length !== 0 || isLoading
+    (localStorage.movies && filteredMovies.length) !== 0 || isLoading
       ? setIsNothing(false)
       : setIsNothing(true);
   }, [filteredMovies, isLoading]);
@@ -97,12 +98,12 @@ function Movies({ onCardClick, savedMovies }) {
         {isLoading && <Preloader />}
         <MoviesCardList
           filteredMovies={filteredMovies}
-          //shortMovies={shortMovies}
           isNothing={isNothing}
           isError={isError}
           isShort={isShort}
           onCardClick={onCardClick}
           savedMovies={savedMovies}
+          onDeleteClick={onDeleteClick}
         />
       </main>
       <Footer />

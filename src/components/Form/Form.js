@@ -30,7 +30,8 @@ function Form({
   return (
     <section className="form">
       <div className="form__content">
-        <img className="form__logo" src={logo} alt="логотип" />
+        <Link to="/"><img className="form__logo" src={logo} alt="логотип" /></Link>
+        
         <h2 className="form__title">{title}</h2>
         <form className="form__container">{children}</form>
         <button

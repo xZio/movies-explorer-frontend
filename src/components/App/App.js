@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -13,6 +13,7 @@ import ProtecedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { mainApi } from "../../utils/MainApi";
 import { filterCheckbox } from "../../utils/utils";
+import { SHORT_MOVIE_DURATION } from "../../utils/constants";
 
 function App() {
   const navigate = useNavigate();
@@ -34,21 +35,43 @@ function App() {
         .catch((err) => {
           console.log(err);
           setLoggedIn(false);
-          localStorage.removeItem("jwt");
+          handleLogout();
         });
     }
   }, []);
 
   useEffect(() => {
     if (loggedIn) {
+      let jwt = localStorage.getItem("jwt");
+      if (jwt) {
+        auth
+          .getContent(jwt)
+          .then((res) => {
+            setLoggedIn(true);
+            setCurrentUser(res);
+          })
+          .catch((err) => {
+            console.log(err);
+            setLoggedIn(false);
+            handleLogout();
+          });
+      }
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
+    if (loggedIn && currentUser) {
       setIsLoading(true);
       mainApi.setHeaders();
       mainApi
         .getSavedMovies()
         .then((data) => {
+          console.log(data);
+          console.log(currentUser);
           const currentUserMovies = data.filter(
             (movie) => movie.owner === currentUser._id
           );
+          console.log(currentUserMovies);
           setSavedMovies(currentUserMovies);
           setSavedShortMovies(filterCheckbox(currentUserMovies));
           setIsLoading(false);
@@ -101,16 +124,26 @@ function App() {
       .setSavedMovie(movie)
       .then((movie) => {
         setSavedMovies([...savedMovies, movie]);
-        movie.duration < 40 &&
+        movie.duration < SHORT_MOVIE_DURATION &&
           setSavedShortMovies([...savedShortMovies, movie]);
       })
       .catch((err) => console.log(err));
   }
 
   function handleDeleteSavedMovie(movie) {
-    mainApi.deleteSavedMovie(movie._id).catch((err) => console.log(err));
-    setSavedMovies(savedMovies.filter((m) => m !== movie));
-    setSavedShortMovies(filterCheckbox(savedMovies.filter((m) => m !== movie)));
+    const deletedMovie = savedMovies.find(
+      (item) => item.movieId === movie.id || item.movieId === movie.movieId
+    );
+    mainApi.deleteSavedMovie(deletedMovie._id).then(() => {
+      const savedMovieList = savedMovies.filter((m) => {
+        if (movie.id === m.movieId || movie.movieId === m.movieId) {
+          return false;
+        } else {
+          return true;
+        }
+      });
+      setSavedMovies(savedMovieList);
+    });
   }
 
   return (
@@ -125,6 +158,7 @@ function App() {
                 <Movies
                   savedMovies={savedMovies}
                   onCardClick={handleSaveMovie}
+                  onDeleteClick={handleDeleteSavedMovie}
                 />
               </ProtecedRoute>
             }
@@ -154,9 +188,25 @@ function App() {
           />
           <Route
             path="/signup"
-            element={<Register handleRegister={handleRegister} />}
+            element={
+              loggedIn ? (
+                <Navigate to="/" />
+              ) : (
+                <Register handleRegister={handleRegister} />
+              )
+            }
           />
-          <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
+          <Route
+            path="/signin"
+            element={
+              loggedIn ? (
+                <Navigate to="/" />
+              ) : (
+                <Login handleLogin={handleLogin} />
+              )
+            }
+          />
+
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>

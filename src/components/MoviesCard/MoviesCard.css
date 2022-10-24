@@ -70,6 +70,11 @@
   position: absolute;
   top: 13px;
   right: 15px;
+  background-image: url(../../images/saved-img.svg);
+  background-position: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .movies-card__unsaved-button {

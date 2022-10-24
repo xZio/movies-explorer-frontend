@@ -1,5 +1,4 @@
 import "./MoviesCard.css";
-import saved from "../../images/saved-img.svg";
 import { useLocation } from "react-router-dom";
 import { ALL_MOVIES_URL } from "../../utils/constants";
 
@@ -48,11 +47,18 @@ function MoviesCard({ movie, onCardClick, isSaved, onDeleteClick }) {
             >
               Сохранить
             </button>
-            <img
+
+            <button
+              type="button"
               className="movies-card__saved-img"
-              alt="Иконка: Фильм сохранён"
-              src={saved}
-            />
+              onClick={handleDelete}
+            >
+              {/* <img
+                className="movies-card__saved-img"
+                alt="Иконка: Фильм сохранён"
+                src={saved}
+              /> */}
+            </button>
           </>
         )}
 

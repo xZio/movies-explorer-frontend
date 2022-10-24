@@ -1,3 +1,5 @@
+import { SHORT_MOVIE_DURATION } from "./constants";
+
 //фильтрация фильмов по ключевому слову
 function filterMovies(movies, inputValue) {
   return movies.filter((movie) => {
@@ -8,7 +10,7 @@ function filterMovies(movies, inputValue) {
 //фильтрация фильмов по состоянию чекбокса
 function filterCheckbox(movies) {
   return movies.filter((movie) => {
-    return movie.duration < 40;
+    return movie.duration < SHORT_MOVIE_DURATION;
   });
 }
 

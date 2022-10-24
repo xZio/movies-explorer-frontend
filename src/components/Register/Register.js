@@ -19,7 +19,7 @@ function Register({ handleRegister }) {
       <div className="register__input-container">
         <span className="register__input-title"> Имя</span>
         <input
-          value={values.name}
+          value={values.name || ""}
           type="text"
           className="register__input"
           name="name"
